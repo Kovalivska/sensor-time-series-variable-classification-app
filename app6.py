@@ -12,7 +12,7 @@ import csv
 import io
 import os
 import plotly_express as px
-import sweetviz as sv # Replaced ydata-profiling with sweetviz
+# import sweetviz as sv # Removed due to Python 3.13 incompatibility
 import sklearn
 
 # Suppress warnings for a cleaner output
@@ -49,7 +49,8 @@ try:
         print(f"Library versions do not match Colab. Attempting to install specific versions: "
               f"pandas=={required_pandas}, numpy=={required_numpy}, scikit-learn=={required_sklearn}")
         # Use os.system to execute pip install
-        os.system(f'pip install pandas=={required_pandas} numpy=={required_numpy} scikit-learn=={required_sklearn} plotly_express openpyxl sweetviz --upgrade --quiet')
+        # Removed sweetviz from installation command as it's causing issues
+        os.system(f'pip install pandas=={required_pandas} numpy=={required_numpy} scikit-learn=={required_sklearn} plotly_express openpyxl --upgrade --quiet')
         st.experimental_rerun() # Rerun the app after installation
     else:
         # Display success message only after set_page_config has run
@@ -58,7 +59,8 @@ try:
 except ImportError:
     # Print to console/log, as st.warning cannot be called before set_page_config
     print("Required libraries not found. Attempting installation.")
-    os.system('pip install pandas==2.2.3 numpy==1.26.4 scikit-learn==1.6.1 plotly_express openpyxl sweetviz --upgrade --quiet')
+    # Removed sweetviz from installation command as it's causing issues
+    os.system('pip install pandas==2.2.3 numpy==1.26.4 scikit-learn==1.6.1 plotly_express openpyxl --upgrade --quiet')
     st.experimental_rerun() # Rerun the app after installation
 
 # --- Helper Functions ---
@@ -656,9 +658,9 @@ if uploaded_file is not None:
     st.info("File uploaded. Processing...")
     st.session_state['original_df'] = load_data_robustly(uploaded_file)
     if st.session_state['original_df'] is not None:
-        st.success("Data successfully loaded into session.")
+        st.success("✅ Data successfully loaded into session.")
     else:
-        st.error("Data could not be loaded. Please check the file.")
+        st.error("❌ Data could not be loaded. Please check the file.")
 else:
     st.info("Please upload a file to begin.")
 
@@ -725,7 +727,7 @@ if st.session_state['original_df'] is not None:
             else:
                 st.warning("No data for categorization.")
                 st.session_state['ergebnis_df'] = pd.DataFrame(columns=['Name', 'Kategorie', 'Cluster', 'Clustername_final', 'Empfehlung', 'Korrelationspartner', 'Korrelationswert'])
-                st.success("Analysis and classification completed, but no variables processed.")
+                st.success("✅ Analysis and classification completed, but no variables processed.")
                 # No return here, allow the rest of the script to run with empty/default data
 
             # Initialize Cluster column before clustering logic to prevent KeyError
@@ -776,7 +778,7 @@ if st.session_state['original_df'] is not None:
             # Step 2.5: Advanced Naming and Recommendations
             st.session_state['ergebnis_df'] = apply_advanced_naming_and_recommendations(ergebnis_df)
 
-        st.success("Analysis and classification completed.")
+        st.success("✅ Analysis and classification completed.")
         st.subheader("Classification Results Table:")
         st.dataframe(st.session_state['ergebnis_df'])
 else:
@@ -903,27 +905,33 @@ st.markdown("---")
 # --- Step 5: Generate Data Report ---
 st.header("Step 5: Generate Data Report")
 if st.session_state.get('original_df') is not None and not st.session_state['original_df'].empty:
-    st.write("Generate a comprehensive data profile report for the uploaded data.")
-    if st.button("Generate Data Profile Report"):
-        with st.spinner("Generating report... This may take a few minutes for large datasets."):
-            try:
-                # Create a Sweetviz report
-                report = sv.analyze(st.session_state['original_df'])
-                
-                # Save the report to a temporary file
-                report_path = "data_profile_report.html"
-                report.show_html(report_path, open_browser=False, layout='widescreen')
+    st.write("Due to library incompatibility with Streamlit Cloud's Python version (Python 3.13), "
+             "comprehensive data profiling libraries like `ydata-profiling` and `sweetviz` are currently not supported. "
+             "Below is a basic in-app data overview.")
+    
+    st.subheader("Basic Data Overview")
+    
+    st.write("### Dataset Information (df.info())")
+    # Redirect info() output to a string buffer to display in Streamlit
+    buffer = io.StringIO()
+    st.session_state['original_df'].info(buf=buffer)
+    st.text(buffer.getvalue())
 
-                with open(report_path, "rb") as f:
-                    st.download_button(
-                        label="Download Data Profile Report (HTML)",
-                        data=f,
-                        file_name="data_profile_report.html",
-                        mime="text/html"
-                    )
-                st.success("Data profile report generated successfully!")
-            except Exception as e:
-                st.error(f"Error generating data profile report: {e}")
+    st.write("### Descriptive Statistics (df.describe())")
+    st.dataframe(st.session_state['original_df'].describe())
+
+    st.write("### Missing Values")
+    st.dataframe(st.session_state['original_df'].isnull().sum().rename('Missing Count'))
+
+    st.write("### Unique Values for Non-Numeric Columns (Top 10)")
+    non_numeric_cols_for_report = st.session_state['original_df'].select_dtypes(exclude=np.number).columns
+    if not non_numeric_cols_for_report.empty:
+        for col in non_numeric_cols_for_report:
+            st.write(f"#### Column: `{col}`")
+            st.dataframe(st.session_state['original_df'][col].value_counts().head(10))
+    else:
+        st.info("No non-numeric columns found for unique value analysis.")
+
 else:
     st.info("Please upload data in Step 1 first to generate a data profile report.")
 
