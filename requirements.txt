@@ -6,3 +6,4 @@ matplotlib
 seaborn
 plotly_express
 openpyxl
+sweetviz # Добавьте эту строку
