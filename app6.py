@@ -12,11 +12,11 @@ import csv
 import io
 import os
 import plotly_express as px # Used for Sunburst chart as per original notebook's explicit use
-from ydata_profiling import ProfileReport # Added for data report generation
+# from ydata_profiling import ProfileReport # REMOVED: Incompatible with Python 3.13
 import sklearn # Added to correctly get sklearn version
 
 # --- Configuration (MUST be the first Streamlit command) ---
-st.set_page_config(layout="wide", page_title="Variable Classification App")
+st.set_page_config(layout="wide", page_title="Variable Classification App (Final Version)")
 
 # --- Library Installation and Version Check for Colab Synchronization ---
 # These commands will attempt to install/update the specified libraries.
@@ -43,7 +43,8 @@ try:
         print(f"Library versions do not match Colab. Attempting to install specific versions: "
               f"pandas=={required_pandas}, numpy=={required_numpy}, scikit-learn=={required_sklearn}")
         # Use os.system to execute pip install
-        os.system(f'pip install pandas=={required_pandas} numpy=={required_numpy} scikit-learn=={required_sklearn} plotly_express ydata-profiling openpyxl --upgrade --quiet')
+        # REMOVED 'ydata-profiling' from the installation command
+        os.system(f'pip install pandas=={required_pandas} numpy=={required_numpy} scikit-learn=={required_sklearn} plotly_express openpyxl --upgrade --quiet')
         st.experimental_rerun() # Rerun the app after installation
     else:
         # Display success message only after set_page_config has run
@@ -52,7 +53,8 @@ try:
 except ImportError:
     # Print to console/log, as st.warning cannot be called before set_page_config
     print("Required libraries not found. Attempting installation.")
-    os.system('pip install pandas==2.2.3 numpy==1.26.4 scikit-learn==1.6.1 plotly_express ydata-profiling openpyxl --upgrade --quiet')
+    # REMOVED 'ydata-profiling' from the installation command
+    os.system('pip install pandas==2.2.3 numpy==1.26.4 scikit-learn==1.6.1 plotly_express openpyxl --upgrade --quiet')
     st.experimental_rerun() # Rerun the app after installation
 
 # Suppress warnings for cleaner output
@@ -73,17 +75,17 @@ def load_data_robustly(uploaded_file):
     file_extension = os.path.splitext(uploaded_file.name)[-1].lower()
 
     if file_extension in ['.xls', '.xlsx', '.xlsm']:
-        st.info(f"📄 Excel file detected: {uploaded_file.name}")
+        st.info(f"Excel file detected: {uploaded_file.name}")
         try:
             # Read as bytes and then use io.BytesIO
             xls = pd.read_excel(io.BytesIO(uploaded_file.getvalue()), sheet_name=None, decimal=",")
-            st.info(f" Available Sheets: {list(xls.keys())}")
+            st.info(f"Available Sheets: {list(xls.keys())}")
             df = next(iter(xls.values()))
-            st.success(" Excel data successfully loaded.")
+            st.success("Excel data successfully loaded.")
         except Exception as e:
-            st.error(f" Error loading Excel file: {str(e)}")
+            st.error(f"Error loading Excel file: {str(e)}")
     else:
-        st.info(f"📄 Attempting to load CSV file: {uploaded_file.name}")
+        st.info(f"Attempting to load CSV file: {uploaded_file.name}")
         common_delimiters = [',', ';', '\t', '|']
         file_content = uploaded_file.getvalue().decode('utf-8') # Decode file content
 
@@ -102,7 +104,7 @@ def load_data_robustly(uploaded_file):
                     # Check for a reasonable number of non-empty columns after dropping all-NaN columns
                     if df_attempt_header0.dropna(axis=1, how='all').shape[1] > 5:
                         df = df_attempt_header0
-                        st.success(f" Successfully loaded with delimiter '{delimiter}' and header=0.")
+                        st.success(f"Successfully loaded with delimiter '{delimiter}' and header=0.")
                         break
             except Exception:
                 pass
@@ -121,17 +123,17 @@ def load_data_robustly(uploaded_file):
                         # Check for a reasonable number of non-empty columns after dropping all-NaN columns
                         if df_attempt_header1.dropna(axis=1, how='all').shape[1] > 5:
                             df = df_attempt_header1
-                            st.success(f" Successfully loaded with delimiter '{delimiter}' and header=1.")
+                            st.success(f"Successfully loaded with delimiter '{delimiter}' and header=1.")
                             break
                 except Exception:
                     pass
 
     if df is None:
-        st.error(" Error: File could not be loaded. Please try another file or check its format/encoding.")
+        st.error("Error: File could not be loaded. Please try another file or check its format/encoding.")
     else:
-        st.write(" Dataset successfully loaded.")
-        st.write(" Shape:", df.shape)
-        st.write(" First 5 rows:")
+        st.write("Dataset successfully loaded.")
+        st.write("Shape:", df.shape)
+        st.write("First 5 rows:")
         st.dataframe(df.head())
         
     return df
@@ -572,7 +574,7 @@ def create_batch_diagrams(df_original):
     Creates batch diagrams for numeric variables (Fireplot).
     Directly adapted from the user's script (Matplotlib).
     """
-    st.subheader(" Batch Diagrams: Time Series of Numeric Variables")
+    st.subheader("Batch Diagrams: Time Series of Numeric Variables")
 
     zeit_spalte = None
     for col in df_original.columns:
@@ -581,7 +583,7 @@ def create_batch_diagrams(df_original):
             break
 
     if zeit_spalte is None:
-        st.error(" Time column (e.g., 'time') not found.")
+        st.error("Time column (e.g., 'time') not found.")
         return
 
     try:
@@ -589,7 +591,7 @@ def create_batch_diagrams(df_original):
         df_original = df_original.dropna(subset=[zeit_spalte])
         df_original = df_original.sort_values(by=zeit_spalte)
     except Exception as e:
-        st.error(f" Error converting time column: {e}")
+        st.error(f"Error converting time column: {e}")
         return
 
     numeric_columns = df_original.select_dtypes(include='number').columns.tolist()
@@ -628,14 +630,14 @@ def create_batch_diagrams(df_original):
         for k in range(len(sub_vars), len(axes)):
             axes[k].axis('off')
 
-        plt.suptitle(" Time Series of Numeric Variables", fontsize=16)
+        plt.suptitle("Time Series of Numeric Variables", fontsize=16)
         plt.tight_layout(rect=[0, 0, 1, 0.96])
         st.pyplot(fig)
         plt.close(fig) # Close figure to free memory
 
 
 # --- Streamlit App Structure ---
-st.title("Variable Analysis and Classification")
+st.title("Variable Analysis and Classification (Final Version)")
 st.markdown("This application helps you classify variables in your dataset and provide recommendations based on their statistical characteristics and clustering.")
 st.markdown("---")
 
@@ -653,9 +655,9 @@ if uploaded_file is not None:
     st.info("File uploaded. Processing...")
     st.session_state['original_df'] = load_data_robustly(uploaded_file)
     if st.session_state['original_df'] is not None:
-        st.success(" Data successfully loaded into session.")
+        st.success("Data successfully loaded into session.")
     else:
-        st.error(" Data could not be loaded. Please check the file.")
+        st.error("Data could not be loaded. Please check the file.")
 else:
     st.info("Please upload a file to begin.")
 
@@ -797,7 +799,7 @@ if st.session_state['original_df'] is not None:
             # Step 2.6: Advanced Naming and Recommendations (now uses pre-calculated correlations and cluster counts)
             st.session_state['ergebnis_df'] = apply_advanced_naming_and_recommendations(ergebnis_df, cluster_counts_dict)
 
-        st.success(" Analysis and classification completed.")
+        st.success("Analysis and classification completed.")
         st.subheader("Classification Results Table:")
         st.dataframe(st.session_state['ergebnis_df'])
 else:
@@ -926,36 +928,42 @@ st.markdown("---")
 
 # --- Step 5: Generate Data Report ---
 st.header("Step 5: Generate Data Report")
-if st.session_state.get('original_df') is not None and not st.session_state['original_df'].empty:
-    st.write("Generate a comprehensive data profile report for the uploaded data.")
-    if st.button("Generate Data Profile Report"):
-        with st.spinner("Generating report... This may take a few minutes for large datasets."):
-            try:
-                # Generate the EDA report using the original_df
-                profile = ProfileReport(st.session_state['original_df'], title="Data Profile Report", explorative=True)
-                
-                # Save the report to a temporary file and then offer it for download
-                report_path = "data_profile_report.html"
-                profile.to_file(report_path)
-
-                with open(report_path, "rb") as f:
-                    st.download_button(
-                        label="Download Data Profile Report (HTML)",
-                        data=f,
-                        file_name="data_profile_report.html",
-                        mime="text/html"
-                    )
-                st.success(" Data profile report generated successfully!")
-            except Exception as e:
-                st.error(f" Error generating data profile report: {e}")
-else:
-    st.info("Please upload data in Step 1 first to generate a data profile report.")
+# The 'Generate Data Report' feature is currently disabled due to library incompatibility with Streamlit Cloud's Python version (Python 3.13).
+# We are awaiting an update to the `ydata-profiling` library that supports Python 3.13, or a change in Streamlit Cloud's default Python version.
+st.info("The 'Generate Data Report' feature is currently disabled due to library incompatibility with Streamlit Cloud's Python version (Python 3.13). We are awaiting an update to the `ydata-profiling` library that supports Python 3.13, or a change in Streamlit Cloud's default Python version.")
+st.write("Generate a comprehensive data profile report for the uploaded data.")
+# Removed the button and functionality for ydata-profiling
+# if st.session_state.get('original_df') is not None and not st.session_state['original_df'].empty:
+#     if st.button("Generate Data Profile Report"):
+#         with st.spinner("Generating report... This may take a few minutes for large datasets."):
+#             try:
+#                 profile = ProfileReport(st.session_state['original_df'], title="Data Profile Report", explorative=True)
+#                 
+#                 report_path = "data_profile_report.html"
+#                 profile.to_file(report_path)
+#
+#                 with open(report_path, "rb") as f:
+#                     st.download_button(
+#                         label="Download Data Profile Report (HTML)",
+#                         data=f,
+#                         file_name="data_profile_report.html",
+#                         mime="text/html"
+#                     )
+#                 st.success("Data profile report generated successfully!")
+#             except Exception as e:
+#                 st.error(f"Error generating data profile report: {e}")
+# else:
+#     st.info("Please upload data in Step 1 first to generate a data profile report.")
 
 st.markdown("---")
 st.info("Thank you for using the Variable Classification App!")
 # Additional output for checking cluster distribution
 # ergebnis_df should be available here if analysis was performed
-
+if st.session_state.get('ergebnis_df') is not None and not st.session_state['ergebnis_df'].empty:
+    st.write("### Distribution of Cluster IDs in Streamlit:")
+    st.dataframe(st.session_state['ergebnis_df']['Cluster'].value_counts())
+else:
+    st.info("Classified data not available for displaying Cluster ID distribution.")
 
 st.write(f"Pandas Version: {pd.__version__}")
 st.write(f"Scikit-learn Version: {sklearn.__version__}")
