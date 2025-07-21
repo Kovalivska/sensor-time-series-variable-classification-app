@@ -6,3 +6,28 @@ __pycache__/
 *.ipynb # Exclude the notebook itself
 venv/
 .env
+
+# Exclude all app versions except 6, 7, 6.1, and 7.1
+app_improved.py
+app_with_data.py
+app8.py
+app8_final.py
+app9_final.py
+app10_final.py
+app11_final.py
+app12_final.py
+app13_final.py
+app14_final.py
+app15_final.py
+app16_final.py
+app17_final.py
+app18_final.py
+app19_final.py
+app20_final.py
+app21_final.py
+
+# Keep only these versions:
+# app6.py
+# app7.py
+# app6.1_final.py
+# app7.1_final.py
