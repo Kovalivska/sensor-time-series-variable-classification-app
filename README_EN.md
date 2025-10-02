@@ -1,7 +1,7 @@
 # Variable Classification App
 ### Automated Classification of Machine Variables with Machine Learning
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://variableclassifierapp-gw2uifdpryaqzgh4pw8ger.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sensor-time-series-variable-classification-app-692cubcxhwiy9fs.streamlit.app/)
 
 > **An intelligent Data Science tool for automated analysis and classification of sensor and machine data**
 
@@ -207,7 +207,7 @@ chmod +x run_app.sh
 
 ### Live Demo
 The complete system is available online:
-**[→ Start Streamlit App](https://variableclassifierapp-gw2uifdpryaqzgh4pw8ger.streamlit.app/)**
+**[→ Start Streamlit App](https://sensor-time-series-variable-classification-app-692cubcxhwiy9fs.streamlit.app/)**
 
 ---
 
