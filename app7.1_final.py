@@ -12,18 +12,26 @@ import csv
 import io
 import os
 import plotly_express as px # Used for Sunburst chart as per original notebook's explicit use
+
 # Safe import for ydata_profiling with fallback
+PROFILING_AVAILABLE = False
+ProfileReport = None
+
 try:
     from ydata_profiling import ProfileReport
     PROFILING_AVAILABLE = True
-except ImportError:
+    print("✅ ydata-profiling successfully imported")
+except ImportError as e:
+    print(f"⚠️ ydata-profiling import failed: {e}")
     try:
         from pandas_profiling import ProfileReport
         PROFILING_AVAILABLE = True
-    except ImportError:
+        print("✅ pandas-profiling successfully imported as fallback")
+    except ImportError as e2:
+        print(f"⚠️ pandas-profiling import also failed: {e2}")
         ProfileReport = None
         PROFILING_AVAILABLE = False
-        print("Warning: ydata-profiling not available. Data profiling features will be disabled.")
+        print("❌ Data profiling features will be disabled")
 
 import sklearn # Added to correctly get sklearn version
 import chardet # Added for enhanced file loading
@@ -1032,8 +1040,32 @@ if st.session_state.get('original_df') is not None and not st.session_state['ori
     st.write("Generate a comprehensive data profile report for the uploaded data.")
     
     if not PROFILING_AVAILABLE:
-        st.warning("⚠️ Data profiling feature is not available. The ydata-profiling package is not installed.")
-        st.info("To enable this feature, install ydata-profiling: `pip install ydata-profiling`")
+        st.error("⚠️ **Data Profiling Feature Unavailable**")
+        st.markdown("""
+        The data profiling functionality requires the `ydata-profiling` package, which is currently not available.
+        
+        **Possible solutions:**
+        - The package may still be installing in the background (wait 2-3 minutes and refresh)
+        - There might be a version conflict with other packages
+        - The package installation failed during deployment
+        
+        **Alternative:** You can still download the classified results from Step 4, which contains all the analysis data.
+        """)
+        
+        # Show package status
+        if st.button("🔍 Check Package Status"):
+            import subprocess
+            import sys
+            try:
+                result = subprocess.run([sys.executable, "-c", "import ydata_profiling; print('✅ ydata-profiling is available')"], 
+                                      capture_output=True, text=True, timeout=10)
+                if result.returncode == 0:
+                    st.success("✅ ydata-profiling package is installed!")
+                    st.info("Try refreshing the page to reload the application.")
+                else:
+                    st.error(f"❌ Package check failed: {result.stderr}")
+            except Exception as e:
+                st.error(f"❌ Error checking package: {str(e)}")
     else:
         if st.button("📊 Generate Data Profile Report"):
             with st.spinner("Generating report... This may take a few minutes for large datasets."):

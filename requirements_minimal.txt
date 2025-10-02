@@ -6,7 +6,6 @@ matplotlib
 seaborn
 plotly==5.17.0
 openpyxl
-ydata-profiling==4.6.4
 chardet
 scipy
 statsmodels
