@@ -1,0 +1,70 @@
+// Erweiterte Klassifikationspipeline
+digraph {
+	rankdir=TB size="8,10"
+	A [label="Live-Datenquelle
+(InfluxDB / CSV)"]
+	B [label="Datenerfassung
+(Pandas)"]
+	C [label="Statistik &
+Zeitreihenanalyse"]
+	D [label="Regelbasierte
+Klassifikation"]
+	D1 [label="→ Kategorie:
+leer"]
+	D2 [label="→ Kategorie:
+konstant"]
+	D3 [label="→ Kategorie:
+boolean"]
+	D4 [label="→ Kategorie:
+rauschsignal"]
+	D5 [label="→ Kategorie:
+status"]
+	D6 [label="→ Kategorie:
+zähler"]
+	D7 [label="→ Kategorie:
+sensorwert"]
+	D8 [label="→ Kategorie:
+instabil"]
+	D9 [label="→ Kategorie:
+grenzwertbasiert"]
+	D10 [label="→ Kategorie:
+abhängig"]
+	D11 [label="→ Kategorie:
+unbekannt"]
+	E [label="Feature-Vektor
+erstellen"]
+	F [label="Unsupervised Clustering
+(K-Means, DBSCAN)"]
+	G [label="Cluster-Benennung
+(Perzentilregel)"]
+	H [label="Ergebnis-Tabelle /
+Export"]
+	A -> B
+	B -> C
+	C -> D
+	D -> D1 [label="alle Werte fehlend"]
+	D -> D2 [label="alle Werte gleich"]
+	D -> D3 [label="nur 0/1"]
+	D -> D4 [label="std < 0.01"]
+	D -> D5 [label="< 10 Änderungen"]
+	D -> D6 [label="monoton wachsend"]
+	D -> D7 [label="viele Änderungen & float"]
+	D -> D8 [label=">10% Ausreißer"]
+	D -> D9 [label="häufig Extremwerte"]
+	D -> D10 [label="starke Korrelation"]
+	D -> D11 [label="nichts davon"]
+	D1 -> E
+	D2 -> E
+	D3 -> E
+	D4 -> E
+	D5 -> E
+	D6 -> E
+	D7 -> E
+	D8 -> E
+	D9 -> E
+	D10 -> E
+	D11 -> E
+	E -> F
+	F -> G
+	G -> H
+}

@@ -1,0 +1,29 @@
+// Pipeline Architektur
+digraph {
+	A [label="Live-Datenquelle
+(InfluxDB / CSV)"]
+	B [label="Datenerfassung
+(Pandas)"]
+	C [label="Statistik &
+Zeitreihenanalyse"]
+	D [label="Regelbasierte
+Klassifikation"]
+	E [label="Kategorie-Zuordnung
+(z. B. Sensor, Status)"]
+	F [label="Feature-Vektoren
+pro Variable"]
+	G [label="Clustering
+(K-Means, DBSCAN)"]
+	H [label="Cluster-Benennung
+(Perzentil-Analyse)"]
+	I [label="Ausgabe
+(Tabelle / Dashboard / Export)"]
+	A -> B
+	B -> C
+	C -> D
+	D -> E
+	E -> F
+	F -> G
+	G -> H
+	H -> I
+}
