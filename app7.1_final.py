@@ -11,7 +11,10 @@ from scipy.spatial.distance import cdist
 import csv
 import io
 import os
-import plotly_express as px # Used for Sunburst chart as per original notebook's explicit use
+try:
+    import plotly.express as px  # Modern plotly import
+except ImportError:
+    import plotly_express as px  # Fallback for older versions
 
 # Safe import for ydata_profiling with fallback
 PROFILING_AVAILABLE = False
