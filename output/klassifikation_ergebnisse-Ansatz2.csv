@@ -1,0 +1,36 @@
+Name,Anzahl Werte,Standardabw,Änderungen,Ausreißeranteil,Perzentilspanne,Extremwertanteil,Skewness,Kategorie,Cluster,Clusterbezeichnung,Empfehlung
+name,6106,,1,,,,,konstant,-1,Dynamische Sensorgrößen,prüfen
+time,6106,8931291228374.654,6106,0.10022928267278088,27887858268672.0,0.00032754667540124465,-0.004541347808592423,zeitstempel,-1,Dynamische Sensorgrößen,weiter prüfen
+/Axis/Settings/SPIND_MAX_VELO_G26,2,0.0,6106,0.0,0.0,1.0,,konstant,-1,Dynamische Sensorgrößen,prüfen
+/Axis/Settings/SPIND_MAX_VELO_LIMS,2,0.0,6106,0.0,0.0,1.0,,konstant,-1,Dynamische Sensorgrößen,prüfen
+/Axis/Settings/SPIND_MIN_VELO_G25,2,0.0,6106,0.0,0.0,1.0,,konstant,-1,Dynamische Sensorgrößen,prüfen
+/Axis/Settings/WORKAREA_LIMIT_MINUS,2,0.0,6106,0.0,0.0,1.0,,konstant,-1,Dynamische Sensorgrößen,prüfen
+/Axis/Settings/WORKAREA_LIMIT_PLUS,2,0.0,6106,0.0,0.0,1.0,,konstant,-1,Dynamische Sensorgrößen,prüfen
+/Axis/Settings/WORKAREA_MINUS_ENABLE,2,0.0,6106,0.0,0.0,1.0,,konstant,-1,Dynamische Sensorgrößen,prüfen
+/Axis/Settings/WORKAREA_PLUS_ENABLE,2,0.0,6106,0.0,0.0,1.0,,konstant,-1,Dynamische Sensorgrößen,prüfen
+/Bag/State/opMode,6,1.0954451150103321,6106,0.0,2.0,1.0,0.0,grenzwertbasiert,1,Dynamische Sensorgrößen,prüfen
+/Bag/State/readyActive,2,0.0,6106,0.0,0.0,1.0,,konstant,-1,Dynamische Sensorgrößen,prüfen
+/Bag/State/resetActive,59,0.5042194840896107,6106,0.0,1.0,1.0,0.03479409305413675,grenzwertbasiert,1,Dynamische Sensorgrößen,prüfen
+/Channel/ChannelDiagnose/actCycleTimeBrut,6003,,6106,,,,,kategorisch,-1,Dynamische Sensorgrößen,weiter prüfen
+/Channel/ChannelDiagnose/actCycleTimeNet,6003,,6106,,,,,kategorisch,-1,Dynamische Sensorgrößen,weiter prüfen
+/Channel/ChannelDiagnose/aveCycleTimeNet,4027,,6098,,,,,kategorisch,-1,Dynamische Sensorgrößen,weiter prüfen
+/Channel/ChannelDiagnose/cycleTime,5953,,6106,,,,,kategorisch,-1,Dynamische Sensorgrößen,weiter prüfen
+/Channel/MachineAxis/measPos1,4579,1094.7231645280494,6101,0.09892989735750164,2833.7000120000002,0.00043677658877484165,0.737483110404239,sensorwert,2,Dynamische Sensorgrößen,relevant
+/Channel/MachineAxis/measPos2,3445,1095.9994701893747,6106,0.10043541364296081,2913.7997159999995,0.0005805515239477503,0.57444776835896,instabil,0,Instabile oder fehleranfällige Werte,eher ignorieren
+/Nck/ChannelDiagnose/actCycleTimeBrut,6003,,6106,,,,,kategorisch,-1,Dynamische Sensorgrößen,weiter prüfen
+/Nck/ChannelDiagnose/actCycleTimeNet,6003,,6106,,,,,kategorisch,-1,Dynamische Sensorgrößen,weiter prüfen
+/Nck/ChannelDiagnose/actNckLoad,6091,,6105,,,,,kategorisch,-1,Dynamische Sensorgrößen,weiter prüfen
+/Nck/ChannelDiagnose/aveCycleTimeNet,4034,,6098,,,,,kategorisch,-1,Dynamische Sensorgrößen,weiter prüfen
+/Nck/ChannelDiagnose/aveNckLoad,5432,,6103,,,,,kategorisch,-1,Dynamische Sensorgrößen,weiter prüfen
+/Nck/ChannelDiagnose/dpSlaveCfgOutputTime,2,0.0,6106,0.0,0.0,1.0,,konstant,-1,Dynamische Sensorgrößen,prüfen
+/Nck/ChannelDiagnose/poweronTime,516,133.56203166187697,6106,0.10077519379844961,398.5,0.005813953488372093,0.23240385768238664,instabil,1,Dynamische Sensorgrößen,eher ignorieren
+/Nck/ChannelDiagnose/setupTime,515,148.81196188478935,6106,0.10097087378640776,462.60000000009313,0.003883495145631068,0.0,instabil,1,Dynamische Sensorgrößen,eher ignorieren
+/Nck/ChannelDiagnose/sumCycleTimeNet,6106,,6106,,,,,kategorisch,-1,Dynamische Sensorgrößen,weiter prüfen
+/Nck/ChannelDiagnose/taskCycleTime,2,0.0,6106,0.0,0.0,1.0,,konstant,-1,Dynamische Sensorgrößen,prüfen
+/Nck/MachineAxis/aaAlarmStat,2,0.0,6106,0.0,0.0,1.0,,konstant,-1,Dynamische Sensorgrößen,prüfen
+/Nck/MachineAxis/aaAxChangeStat,1425,1.0003449040530237,6104,0.0,2.0,1.0,0.007024983941424956,grenzwertbasiert,1,Dynamische Sensorgrößen,prüfen
+/Nck/MachineAxis/aaAxChangeTyp,2,0.0,6106,0.0,0.0,1.0,,konstant,-1,Dynamische Sensorgrößen,prüfen
+/Nck/MachineAxis/status,1557,1.3390537347917653,6104,0.0,3.0,0.781631342324984,-0.12488373078728637,grenzwertbasiert,1,Dynamische Sensorgrößen,prüfen
+/Nck/MachineAxis/toolBaseDistToGo,1576,715.2069716991165,6105,0.10025380710659898,2074.90549,0.0012690355329949238,-1.393900677916855,instabil,0,Instabile oder fehleranfällige Werte,eher ignorieren
+/Nck/MachineAxis/toolBaseREPOS,23,0.0001748890105407002,6106,0.17391304347826086,0.0005969999999999997,0.13043478260869565,1.0298733745497382,rauschsignal,1,Dynamische Sensorgrößen,eher ignorieren
+timestamp,6106,,6106,0.10022928267278088,,0.00032754667540124465,,zeitstempel,-1,Dynamische Sensorgrößen,weiter prüfen

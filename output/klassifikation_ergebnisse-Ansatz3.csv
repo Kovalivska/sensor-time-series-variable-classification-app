@@ -1,0 +1,35 @@
+Name,Kategorie,Mittelwert,Standardabw,Skewness,Anzahl Änderungen,Ausreißeranteil,Extremwertanteil,Cluster,Clustername,Empfehlung
+name,konstant,,,,1,,,0,Modusvariablen,prüfen
+time,zeitstempel,1.749627802574812e+18,8931291228374.654,-0.004540232104922099,6106,0.10022928267278088,0.00032754667540124465,1,Energiesensoren,hoch relevant
+/Axis/Settings/SPIND_MAX_VELO_G26,konstant,1000.0,0.0,,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Axis/Settings/SPIND_MAX_VELO_LIMS,konstant,100.0,0.0,,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Axis/Settings/SPIND_MIN_VELO_G25,konstant,0.0,0.0,,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Axis/Settings/WORKAREA_LIMIT_MINUS,konstant,-100000000.0,0.0,,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Axis/Settings/WORKAREA_LIMIT_PLUS,konstant,100000000.0,0.0,,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Axis/Settings/WORKAREA_MINUS_ENABLE,konstant,1.0,0.0,,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Axis/Settings/WORKAREA_PLUS_ENABLE,konstant,1.0,0.0,,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Bag/State/opMode,grenzwertbasiert,1.0,1.0954451150103321,0.0,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Bag/State/readyActive,konstant,1.0,0.0,,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Bag/State/resetActive,grenzwertbasiert,0.4915254237288136,0.5042194840896107,0.033903175181040426,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Channel/ChannelDiagnose/actCycleTimeBrut,kategorisch,,,,6106,,,0,Modusvariablen,prüfen
+/Channel/ChannelDiagnose/actCycleTimeNet,kategorisch,,,,6106,,,0,Modusvariablen,prüfen
+/Channel/ChannelDiagnose/aveCycleTimeNet,kategorisch,,,,6098,,,0,Modusvariablen,prüfen
+/Channel/ChannelDiagnose/cycleTime,kategorisch,,,,6106,,,0,Modusvariablen,prüfen
+/Channel/MachineAxis/measPos1,sensorwert,,,,6101,,,0,Modusvariablen,prüfen
+/Channel/MachineAxis/measPos2,instabil,,,,6106,,,0,Modusvariablen,prüfen
+/Nck/ChannelDiagnose/actCycleTimeBrut,kategorisch,,,,6106,,,0,Modusvariablen,prüfen
+/Nck/ChannelDiagnose/actCycleTimeNet,kategorisch,,,,6106,,,0,Modusvariablen,prüfen
+/Nck/ChannelDiagnose/actNckLoad,kategorisch,,,,6105,,,0,Modusvariablen,prüfen
+/Nck/ChannelDiagnose/aveCycleTimeNet,kategorisch,,,,6098,,,0,Modusvariablen,prüfen
+/Nck/ChannelDiagnose/aveNckLoad,kategorisch,,,,6103,,,0,Modusvariablen,prüfen
+/Nck/ChannelDiagnose/dpSlaveCfgOutputTime,konstant,0.0,0.0,,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Nck/ChannelDiagnose/poweronTime,instabil,191.2906976744186,133.56203166187697,0.2317277187949534,6106,0.10077519379844961,0.005813953488372093,0,Modusvariablen,prüfen
+/Nck/ChannelDiagnose/setupTime,instabil,1801189.0,148.81196188478935,0.0,6106,0.10097087378640776,0.003883495145631068,0,Modusvariablen,prüfen
+/Nck/ChannelDiagnose/sumCycleTimeNet,kategorisch,,,,6106,,,0,Modusvariablen,prüfen
+/Nck/ChannelDiagnose/taskCycleTime,konstant,2.0,0.0,,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Nck/MachineAxis/aaAlarmStat,konstant,0.0,0.0,,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Nck/MachineAxis/aaAxChangeStat,grenzwertbasiert,0.9964912280701754,1.0003449040530237,0.007017587058225069,6104,0.0,1.0,0,Modusvariablen,prüfen
+/Nck/MachineAxis/aaAxChangeTyp,konstant,0.0,0.0,,6106,0.0,1.0,0,Modusvariablen,prüfen
+/Nck/MachineAxis/status,grenzwertbasiert,1.6461143224149004,1.3390537347917653,-0.12476338669693324,6104,0.0,0.781631342324984,0,Modusvariablen,prüfen
+/Nck/MachineAxis/toolBaseDistToGo,instabil,,,,6105,,,0,Modusvariablen,prüfen
+/Nck/MachineAxis/toolBaseREPOS,rauschsignal,,,,6106,,,0,Modusvariablen,prüfen

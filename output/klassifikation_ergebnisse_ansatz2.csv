@@ -1,0 +1,102 @@
+Name;Anzahl Werte;Standardabw;Änderungen;Ausreißeranteil;Perzentilspanne;Extremwertanteil;Skewness;Kategorie;Cluster;Clusterbezeichnung;Empfehlung
+time;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+status_1;20000;;14987;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+status_2;20000;;15086;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+status_3;20000;;14927;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+status_4;20000;;14969;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+status_5;20000;;14941;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+text_id_1;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+text_id_2;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+text_id_3;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+text_id_4;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+text_id_5;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_1;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_2;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_3;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_4;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_5;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_6;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_7;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_8;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_9;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_10;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_11;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_12;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_13;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_14;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_15;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_16;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_17;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_18;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_19;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_20;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_21;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_22;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_23;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_24;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_25;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_26;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_27;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_28;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_29;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_30;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_31;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_32;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_33;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_34;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_35;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_36;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_37;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_38;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_39;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_40;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+sensor_value_41;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+counter_1;20000;5773.66046135184;18168;0.09995;17998.1;0.00015;8.173371482632617e-06;sensorwert;2;Dynamische Sensorgrößen;relevant
+counter_2;20000;5773.635051237238;18196;0.1;17998.1;0.0001;-5.732344436333485e-06;sensorwert;2;Dynamische Sensorgrößen;relevant
+counter_3;20000;5773.671325039118;18231;0.1;17998.2;0.0001;-1.8765185943873652e-06;sensorwert;0;Dynamische Sensorgrößen;relevant
+counter_4;20000;5773.660659472195;18264;0.0999;18000.05;0.0001;-4.438518535669913e-06;sensorwert;0;Dynamische Sensorgrößen;relevant
+counter_5;20000;5773.654002310624;18170;0.1;18002.1;0.0001;2.029435821503477e-06;sensorwert;2;Dynamische Sensorgrößen;relevant
+counter_6;20000;5773.65166385129;18258;0.09995;18000.05;0.0001;-9.782978791492964e-06;sensorwert;0;Dynamische Sensorgrößen;relevant
+counter_7;20000;5773.6393845500825;18151;0.1;17998.149999999998;0.0001;-3.0456889412194856e-06;sensorwert;2;Dynamische Sensorgrößen;relevant
+counter_8;20000;5773.661190247701;18213;0.09995;18001.1;0.0003;4.681897205647371e-06;sensorwert;0;Dynamische Sensorgrößen;relevant
+constant_1;20000;0.0;1;0.0;0.0;1.0;0.0;konstant;-1;Statische Konfigurationswerte;prüfen
+constant_2;20000;0.0;1;0.0;0.0;1.0;0.0;konstant;-1;Statische Konfigurationswerte;prüfen
+constant_3;20000;0.0;1;0.0;0.0;1.0;0.0;konstant;-1;Statische Konfigurationswerte;prüfen
+constant_4;20000;0.0;1;0.0;0.0;1.0;0.0;konstant;-1;Statische Konfigurationswerte;prüfen
+constant_5;20000;0.0;1;0.0;0.0;1.0;0.0;konstant;-1;Statische Konfigurationswerte;prüfen
+constant_6;20000;0.0;1;0.0;0.0;1.0;0.0;konstant;-1;Statische Konfigurationswerte;prüfen
+constant_7;20000;0.0;1;0.0;0.0;1.0;0.0;konstant;-1;Statische Konfigurationswerte;prüfen
+constant_8;20000;0.0;1;0.0;0.0;1.0;0.0;konstant;-1;Statische Konfigurationswerte;prüfen
+boolean_1;20000;0.4999944371909162;10026;0.0;1.0;1.0;0.017001889326545644;grenzwertbasiert;1;Sonstige Variable;prüfen
+boolean_2;20000;0.5000124379672032;9943;0.0;1.0;1.0;0.0010000751321974958;grenzwertbasiert;1;Sonstige Variable;prüfen
+boolean_3;20000;0.5000103979117846;10024;0.0;1.0;1.0;-0.005800459432674607;grenzwertbasiert;1;Sonstige Variable;prüfen
+boolean_4;20000;0.5000100979029326;10043;0.0;1.0;1.0;0.006200494838016017;grenzwertbasiert;1;Sonstige Variable;prüfen
+boolean_5;20000;0.5000124379672032;9932;0.0;1.0;1.0;0.001000075132197498;grenzwertbasiert;1;Sonstige Variable;prüfen
+boolean_6;20000;0.49999133949197394;9980;0.0;1.0;1.0;-0.018402158928108963;grenzwertbasiert;1;Sonstige Variable;prüfen
+boolean_7;20000;0.5000117779501844;9909;0.0;1.0;1.0;-0.003400259937819218;grenzwertbasiert;1;Sonstige Variable;prüfen
+boolean_8;20000;0.5000121979611153;9989;0.0;1.0;1.0;0.0022001663469152265;grenzwertbasiert;1;Sonstige Variable;prüfen
+outlier_1;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+outlier_2;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+outlier_3;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+outlier_4;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+outlier_5;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+outlier_6;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+outlier_7;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+outlier_8;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+periodic_1;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+periodic_2;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+periodic_3;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+periodic_4;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+periodic_5;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+periodic_6;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+periodic_7;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+periodic_8;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+noise_1;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+noise_2;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+noise_3;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+noise_4;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+noise_5;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+noise_6;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+noise_7;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+noise_8;20000;;20000;;;;;kategorisch;-1;Statische Konfigurationswerte;weiter prüfen
+timestamp;20000;;20000;0.1;;0.0001;;zeitstempel;-1;Statische Konfigurationswerte;weiter prüfen

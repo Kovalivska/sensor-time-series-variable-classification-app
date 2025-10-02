@@ -12,7 +12,19 @@ import csv
 import io
 import os
 import plotly_express as px # Used for Sunburst chart as per original notebook's explicit use
-from ydata_profiling import ProfileReport # Added for data report generation
+# Safe import for ydata_profiling with fallback
+try:
+    from ydata_profiling import ProfileReport
+    PROFILING_AVAILABLE = True
+except ImportError:
+    try:
+        from pandas_profiling import ProfileReport
+        PROFILING_AVAILABLE = True
+    except ImportError:
+        ProfileReport = None
+        PROFILING_AVAILABLE = False
+        print("Warning: ydata-profiling not available. Data profiling features will be disabled.")
+
 import sklearn # Added to correctly get sklearn version
 import chardet # Added for enhanced file loading
 
@@ -1018,26 +1030,31 @@ st.markdown("---")
 st.header("📋 Step 5: Generate Data Report")
 if st.session_state.get('original_df') is not None and not st.session_state['original_df'].empty:
     st.write("Generate a comprehensive data profile report for the uploaded data.")
-    if st.button("📊 Generate Data Profile Report"):
-        with st.spinner("Generating report... This may take a few minutes for large datasets."):
-            try:
-                # Generate the EDA report using the original_df
-                profile = ProfileReport(st.session_state['original_df'], title="Data Profile Report", explorative=True)
-                
-                # Save the report to a temporary file and then offer it for download
-                report_path = "data_profile_report.html"
-                profile.to_file(report_path)
+    
+    if not PROFILING_AVAILABLE:
+        st.warning("⚠️ Data profiling feature is not available. The ydata-profiling package is not installed.")
+        st.info("To enable this feature, install ydata-profiling: `pip install ydata-profiling`")
+    else:
+        if st.button("📊 Generate Data Profile Report"):
+            with st.spinner("Generating report... This may take a few minutes for large datasets."):
+                try:
+                    # Generate the EDA report using the original_df
+                    profile = ProfileReport(st.session_state['original_df'], title="Data Profile Report", explorative=True)
+                    
+                    # Save the report to a temporary file and then offer it for download
+                    report_path = "data_profile_report.html"
+                    profile.to_file(report_path)
 
-                with open(report_path, "rb") as f:
-                    st.download_button(
-                        label="📥 Download Data Profile Report (HTML)",
-                        data=f,
-                        file_name="data_profile_report.html",
-                        mime="text/html"
-                    )
-                st.success("✅ Data profile report generated successfully!")
-            except Exception as e:
-                st.error(f"❌ Error generating data profile report: {e}")
+                    with open(report_path, "rb") as f:
+                        st.download_button(
+                            label="📥 Download Data Profile Report (HTML)",
+                            data=f,
+                            file_name="data_profile_report.html",
+                            mime="text/html"
+                        )
+                    st.success("✅ Data profile report generated successfully!")
+                except Exception as e:
+                    st.error(f"❌ Error generating data profile report: {e}")
 else:
     st.info("Please upload data in Step 1 first to generate a data profile report.")
 

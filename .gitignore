@@ -1,13 +1,14 @@
 __pycache__/
 .streamlit/
-*.html
-*.png
-*.csv
-*.ipynb # Exclude the notebook itself
 venv/
 .env
+.DS_Store
 
-# Exclude all app versions except 6, 7, 6.1, and 7.1
+# Exclude temporary HTML reports (but keep important ones in output/)
+data_report.html
+data_profile_report.html
+
+# Exclude all app versions except the main ones
 app_improved.py
 app_with_data.py
 app8.py
@@ -31,3 +32,10 @@ app21_final.py
 # app7.py
 # app6.1_final.py
 # app7.1_final.py
+
+# Keep all data files, notebooks, and important output files
+# Do NOT exclude:
+# *.csv (data files)
+# *.png (screenshots and visualizations)
+# *.ipynb (Jupyter notebooks)
+# *.html in output/ folder
