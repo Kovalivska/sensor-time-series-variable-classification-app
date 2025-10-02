@@ -6,6 +6,10 @@
 
 > **Ein intelligentes Data Science Tool zur automatisierten Analyse und Klassifikation von Sensor- und Maschinendaten**
 
+### Live-Demo
+Das vollständige System ist online verfügbar:
+**[→ Streamlit App starten](https://sensor-time-series-variable-classification-app-692cubcxhwiy9fs.streamlit.app/)**
+
 ![App Interface](output/app_1.png)
 
 ---
@@ -205,10 +209,6 @@ streamlit run app7.1_final.py
 chmod +x run_app.sh
 ./run_app.sh
 ```
-
-### Live-Demo
-Das vollständige System ist online verfügbar:
-**[→ Streamlit App starten](https://sensor-time-series-variable-classification-app-692cubcxhwiy9fs.streamlit.app/)**
 
 ---
 
