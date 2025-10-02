@@ -83,6 +83,184 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 
+# --- Alternative Data Profiling Function ---
+def generate_custom_data_profile(df, title="Data Profile Report"):
+    """
+    Generate a custom data profile report using pandas and matplotlib
+    when ydata-profiling is not available.
+    """
+    import io
+    from datetime import datetime
+    
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>{title}</title>
+        <style>
+            body {{ font-family: Arial, sans-serif; margin: 20px; }}
+            .header {{ background-color: #f0f2f6; padding: 20px; border-radius: 5px; }}
+            .section {{ margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }}
+            .metric {{ display: inline-block; margin: 10px; padding: 10px; background-color: #f8f9fa; border-radius: 3px; }}
+            table {{ border-collapse: collapse; width: 100%; }}
+            th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
+            th {{ background-color: #f2f2f2; }}
+            .warning {{ color: #856404; background-color: #fff3cd; padding: 10px; border-radius: 3px; }}
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>{title}</h1>
+            <p>Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
+            <p class="warning">⚠️ This is a simplified profile report. For comprehensive profiling, install ydata-profiling.</p>
+        </div>
+        
+        <div class="section">
+            <h2>📊 Dataset Overview</h2>
+            <div class="metric"><strong>Rows:</strong> {df.shape[0]:,}</div>
+            <div class="metric"><strong>Columns:</strong> {df.shape[1]:,}</div>
+            <div class="metric"><strong>Memory Usage:</strong> {df.memory_usage(deep=True).sum() / 1024**2:.2f} MB</div>
+            <div class="metric"><strong>Duplicated Rows:</strong> {df.duplicated().sum():,}</div>
+        </div>
+        
+        <div class="section">
+            <h2>📋 Column Information</h2>
+            <table>
+                <tr><th>Column</th><th>Type</th><th>Non-Null Count</th><th>Null Count</th><th>Null %</th><th>Unique Values</th></tr>
+    """
+    
+    for col in df.columns:
+        dtype = str(df[col].dtype)
+        non_null = df[col].notna().sum()
+        null_count = df[col].isna().sum()
+        null_pct = (null_count / len(df)) * 100
+        unique_count = df[col].nunique()
+        
+        html_content += f"""
+                <tr>
+                    <td>{col}</td>
+                    <td>{dtype}</td>
+                    <td>{non_null:,}</td>
+                    <td>{null_count:,}</td>
+                    <td>{null_pct:.1f}%</td>
+                    <td>{unique_count:,}</td>
+                </tr>
+        """
+    
+    html_content += """
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>🔢 Numerical Columns Summary</h2>
+            <table>
+                <tr><th>Column</th><th>Mean</th><th>Std</th><th>Min</th><th>25%</th><th>50%</th><th>75%</th><th>Max</th></tr>
+    """
+    
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    for col in numeric_cols:
+        if df[col].notna().sum() > 0:  # Only if column has non-null values
+            desc = df[col].describe()
+            html_content += f"""
+                <tr>
+                    <td>{col}</td>
+                    <td>{desc['mean']:.3f}</td>
+                    <td>{desc['std']:.3f}</td>
+                    <td>{desc['min']:.3f}</td>
+                    <td>{desc['25%']:.3f}</td>
+                    <td>{desc['50%']:.3f}</td>
+                    <td>{desc['75%']:.3f}</td>
+                    <td>{desc['max']:.3f}</td>
+                </tr>
+            """
+    
+    html_content += """
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>📝 Text/Categorical Columns</h2>
+            <table>
+                <tr><th>Column</th><th>Most Frequent</th><th>Frequency</th><th>Unique Count</th></tr>
+    """
+    
+    categorical_cols = df.select_dtypes(include=['object', 'category']).columns
+    for col in categorical_cols:
+        if df[col].notna().sum() > 0:
+            value_counts = df[col].value_counts()
+            most_frequent = value_counts.index[0] if len(value_counts) > 0 else "N/A"
+            frequency = value_counts.iloc[0] if len(value_counts) > 0 else 0
+            unique_count = df[col].nunique()
+            
+            html_content += f"""
+                <tr>
+                    <td>{col}</td>
+                    <td>{str(most_frequent)[:50]}{'...' if len(str(most_frequent)) > 50 else ''}</td>
+                    <td>{frequency:,}</td>
+                    <td>{unique_count:,}</td>
+                </tr>
+            """
+    
+    html_content += """
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>⚠️ Data Quality Issues</h2>
+            <ul>
+    """
+    
+    # Check for data quality issues
+    issues = []
+    
+    # Missing values
+    missing_cols = df.columns[df.isna().any()].tolist()
+    if missing_cols:
+        issues.append(f"<li><strong>Missing Values:</strong> {len(missing_cols)} columns have missing values: {', '.join(missing_cols[:5])}{'...' if len(missing_cols) > 5 else ''}</li>")
+    
+    # Duplicated rows
+    if df.duplicated().sum() > 0:
+        issues.append(f"<li><strong>Duplicate Rows:</strong> {df.duplicated().sum():,} duplicated rows found</li>")
+    
+    # Constant columns
+    constant_cols = [col for col in df.columns if df[col].nunique() <= 1]
+    if constant_cols:
+        issues.append(f"<li><strong>Constant Columns:</strong> {len(constant_cols)} columns with constant values: {', '.join(constant_cols)}</li>")
+    
+    # High cardinality columns
+    high_card_cols = [col for col in df.select_dtypes(include=['object']).columns if df[col].nunique() > 0.8 * len(df)]
+    if high_card_cols:
+        issues.append(f"<li><strong>High Cardinality:</strong> {len(high_card_cols)} text columns with >80% unique values: {', '.join(high_card_cols)}</li>")
+    
+    if not issues:
+        issues.append("<li>✅ No major data quality issues detected</li>")
+    
+    html_content += ''.join(issues)
+    
+    html_content += """
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>💡 Recommendations</h2>
+            <ul>
+                <li>🔍 Use the Variable Classification results from Step 4 for detailed variable analysis</li>
+                <li>📊 Check correlation patterns in the heatmap visualization</li>
+                <li>🎯 Focus on variables marked as "highly relevant" in the classification</li>
+                <li>⚙️ For advanced profiling, install ydata-profiling: <code>pip install ydata-profiling</code></li>
+            </ul>
+        </div>
+        
+        <footer style="margin-top: 40px; padding: 20px; background-color: #f8f9fa; text-align: center;">
+            <p>Generated by Variable Classification App | <a href="https://github.com/Kovalivska/sensor-time-series-variable-classification-app">GitHub Repository</a></p>
+        </footer>
+    </body>
+    </html>
+    """
+    
+    return html_content
+
+
 # --- Enhanced Helper Functions with Robust File Loading ---
 
 def detect_encoding(file_bytes):
@@ -1039,54 +1217,85 @@ st.header("📋 Step 5: Generate Data Report")
 if st.session_state.get('original_df') is not None and not st.session_state['original_df'].empty:
     st.write("Generate a comprehensive data profile report for the uploaded data.")
     
-    if not PROFILING_AVAILABLE:
-        st.error("⚠️ **Data Profiling Feature Unavailable**")
-        st.markdown("""
-        The data profiling functionality requires the `ydata-profiling` package, which is currently not available.
-        
-        **Possible solutions:**
-        - The package may still be installing in the background (wait 2-3 minutes and refresh)
-        - There might be a version conflict with other packages
-        - The package installation failed during deployment
-        
-        **Alternative:** You can still download the classified results from Step 4, which contains all the analysis data.
-        """)
-        
-        # Show package status
-        if st.button("🔍 Check Package Status"):
-            import subprocess
-            import sys
-            try:
-                result = subprocess.run([sys.executable, "-c", "import ydata_profiling; print('✅ ydata-profiling is available')"], 
-                                      capture_output=True, text=True, timeout=10)
-                if result.returncode == 0:
-                    st.success("✅ ydata-profiling package is installed!")
-                    st.info("Try refreshing the page to reload the application.")
-                else:
-                    st.error(f"❌ Package check failed: {result.stderr}")
-            except Exception as e:
-                st.error(f"❌ Error checking package: {str(e)}")
-    else:
-        if st.button("📊 Generate Data Profile Report"):
-            with st.spinner("Generating report... This may take a few minutes for large datasets."):
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        if st.button("📊 Generate Custom Data Profile"):
+            with st.spinner("Generating custom data profile..."):
                 try:
-                    # Generate the EDA report using the original_df
-                    profile = ProfileReport(st.session_state['original_df'], title="Data Profile Report", explorative=True)
+                    # Generate custom profile using our built-in function
+                    html_report = generate_custom_data_profile(
+                        st.session_state['original_df'], 
+                        title="Variable Classification - Data Profile Report"
+                    )
                     
-                    # Save the report to a temporary file and then offer it for download
-                    report_path = "data_profile_report.html"
-                    profile.to_file(report_path)
-
-                    with open(report_path, "rb") as f:
-                        st.download_button(
-                            label="📥 Download Data Profile Report (HTML)",
-                            data=f,
-                            file_name="data_profile_report.html",
-                            mime="text/html"
-                        )
-                    st.success("✅ Data profile report generated successfully!")
+                    # Save to temporary file and offer download
+                    report_path = "custom_data_profile.html"
+                    with open(report_path, "w", encoding='utf-8') as f:
+                        f.write(html_report)
+                    
+                    st.download_button(
+                        label="📥 Download Custom Data Profile (HTML)",
+                        data=html_report,
+                        file_name="custom_data_profile.html",
+                        mime="text/html"
+                    )
+                    st.success("✅ Custom data profile generated successfully!")
+                    
                 except Exception as e:
-                    st.error(f"❌ Error generating data profile report: {e}")
+                    st.error(f"❌ Error generating custom data profile: {e}")
+    
+    with col2:
+        if PROFILING_AVAILABLE:
+            if st.button("📊 Generate Advanced Profile (ydata-profiling)"):
+                with st.spinner("Generating advanced report... This may take a few minutes for large datasets."):
+                    try:
+                        # Generate the EDA report using the original_df
+                        profile = ProfileReport(st.session_state['original_df'], title="Data Profile Report", explorative=True)
+                        
+                        # Save the report to a temporary file and then offer it for download
+                        report_path = "advanced_data_profile.html"
+                        profile.to_file(report_path)
+
+                        with open(report_path, "rb") as f:
+                            st.download_button(
+                                label="📥 Download Advanced Profile (HTML)",
+                                data=f,
+                                file_name="advanced_data_profile.html",
+                                mime="text/html"
+                            )
+                        st.success("✅ Advanced data profile generated successfully!")
+                    except Exception as e:
+                        st.error(f"❌ Error generating advanced data profile: {e}")
+        else:
+            st.info("🔧 **Advanced Profiling Unavailable**")
+            st.markdown("""
+            The advanced profiling requires `ydata-profiling` package.
+            
+            **Current status:** Package not available in this deployment.
+            
+            **Alternative:** Use the **Custom Data Profile** button which provides:
+            - Dataset overview and statistics
+            - Column-by-column analysis  
+            - Data quality assessment
+            - Basic recommendations
+            """)
+            
+            # Show package status check
+            with st.expander("🔍 Technical Details"):
+                if st.button("Check Package Status"):
+                    import subprocess
+                    import sys
+                    try:
+                        result = subprocess.run([sys.executable, "-c", "import ydata_profiling; print('✅ ydata-profiling is available')"], 
+                                              capture_output=True, text=True, timeout=10)
+                        if result.returncode == 0:
+                            st.success("✅ ydata-profiling package is installed!")
+                            st.info("Try refreshing the page to reload the application.")
+                        else:
+                            st.error(f"❌ Package check failed: {result.stderr}")
+                    except Exception as e:
+                        st.error(f"❌ Error checking package: {str(e)}")
 else:
     st.info("Please upload data in Step 1 first to generate a data profile report.")
 
